@@ -6,7 +6,7 @@
 * Megan Otsuka
 * Rahul Shankar
 
-####Directories
+###Directories
 
 **rawdata/** contains the raw data. This is created by skeleton.R
 
