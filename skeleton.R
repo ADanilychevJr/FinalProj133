@@ -1,9 +1,22 @@
 #This file creates directories and downloads the raw data
 
 install.packages('WDI')
+library('WDI')
+source("code/constants.R")
 
-getwd()
+#Create directories
 dir.create("rawdata")
+dir.create("data")
 
-download.file("http://www.oecd.org/dac/stats/documentupload/AAAG.csv","rawdata/foreignAidRaw.csv")
-download.file("https://raw.githubusercontent.com/ADanilychevJr/myData/master/censorship/oni_country_data_2013-09-20.csv", "rawdata/censorshipRaw.csv")
+#Download the raw data
+download.file(foreignAidURL,rawAidLoc)
+download.file(censorshipURL, rawCensorshipLoc)
+
+#This calls code/cleanData.R, executing all commands it contains
+source("code/cleanData.R") 
+
+head(censorship)
+str(censorship)
+str(foreignAid)
+
+
