@@ -17,3 +17,20 @@
 * cleanData.R - This is where the data cleaning code is. 
 * downloadRaw.R - This is where we download all the data and save it to the raw folder
 
+###Git Help
+
+Run this ONCE `git clone https://github.com/ADanilychevJr/FinalProj133.git`
+
+Everytime you start working (before changing any files):
+`git pull origin master`
+
+When you are satisfied that you finished work and want to send it to the master copy in the cloud:
+`git add "your file name"`
+`git commit -m "some comment about what you added" `
+`git push origin master` (This sends to Github)
+
+#####Extra commands: 
+
+To see your local status: 
+`git status` (this shows you what has been changed, committed etc)
+
