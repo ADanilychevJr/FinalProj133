@@ -1,4 +1,5 @@
 #This downloads the raw data
+source("code/constants.R")
 
 install.packages('WDI')
 library('WDI')
@@ -6,6 +7,7 @@ library('WDI')
 #Download the raw data
 download.file(foreignAidURL,rawAidLoc)
 download.file(censorshipURL, rawCensorshipLoc)
+download.file(refugeeURL, rawRefugeeLoc)
 
 #To search stats, WDIsearch("gdp") or WDIsearch("aid"). This is basically a grep
 #Once you find your indicator code, do like this VVV
