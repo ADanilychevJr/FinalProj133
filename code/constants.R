@@ -7,3 +7,7 @@ censorshipURL = "https://raw.githubusercontent.com/ADanilychevJr/myData/master/c
 
 rawAidLoc = "rawdata/foreignAidRaw.csv"
 rawCensorshipLoc = "rawdata/censorshipRaw.csv"
+
+gdp_dat_indic = "NY.GDP.MKTP.CD"
+gdp_per_cap_indic = "NY.GDP.PCAP.CD"
+total_pop_indic = "SP.POP.TOTL"
