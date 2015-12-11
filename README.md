@@ -2,7 +2,6 @@
 
 ###Team
 ======
-
 * Alex Danilychev Jr
 * Kristie Chang
 * Megan Otsuka
@@ -10,7 +9,6 @@
 
 ###Directories
 ======
-
 **rawdata/** contains the raw data. This is created by skeleton.R
 
 **data/** contains clean data. This is created by skeleton.R
@@ -24,7 +22,6 @@
 
 ###Data Sources
 ======
-
 **Censorship Data** We pulled our censorship data from [OpenNet](https://opennet.net/research/data)
 
 **Foreign Aid Data** We pulled our data for foreign aid from the [Organisation for Economic Co-operation and Development](http://www.oecd.org/dac/stats/aid-at-a-glance.htm)
@@ -35,7 +32,6 @@
 
 ###Git Help
 ======
-
 Run this ONCE `git clone https://github.com/ADanilychevJr/FinalProj133.git`
 
 Everytime you start working (before changing any files):
