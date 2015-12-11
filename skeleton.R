@@ -5,6 +5,7 @@ source("code/constants.R")
 dir.create("rawdata")
 dir.create("data")
 dir.create("cleandata")
+dir.create("resources")
 
 #This calls code/downloadRaw.R, which downloads our data
 source("code/downloadRaw.R") 

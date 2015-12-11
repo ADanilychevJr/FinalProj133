@@ -8,6 +8,7 @@ library('WDI')
 download.file(foreignAidURL,rawAidLoc)
 download.file(censorshipURL, rawCensorshipLoc)
 download.file(refugeeURL, rawRefugeeLoc)
+download.file(censorshipReadmeURL, censorshipReadmeLoc)
 
 #To search stats, WDIsearch("gdp") or WDIsearch("aid"). This is basically a grep
 #Once you find your indicator code, do like this VVV
