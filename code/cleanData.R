@@ -28,18 +28,21 @@ wdi_frame = cleanWDICountryNames(wdi_frame)
 
 
 
-#Creating `net_foreignAid` DF which is the amount each country gave AND received
+#Creating `net_foreignAid` DF which is the amount each country gave
 net_foreignAid = foreignAid[grep(".*Net Disbursements.*", foreignAid$colname),]
 row.names(net_foreignAid) = 1:nrow(net_foreignAid)
 dropped_cols = c("year","DonorCode","src", "RecipientCode", "regionid",
                  "col", "incomegrid", "incomegrname", "rowname", "Row", 
                  "Defl", "NatCur", "currencyname", "odaGNI", "colname",
-                 "RecipientNameE", "Regionnname", "share")
+                 "RecipientNameE",  "share")
 net_foreignAid = net_foreignAid[,!names(net_foreignAid) %in% dropped_cols]
-colnames(net_foreignAid)[which(names(net_foreignAid) == "Amount")] <- "AmountGivenUSD"
+#colnames(net_foreignAid)[which(names(net_foreignAid) == "Amount")] <- "AmountGivenUSD"
 colnames(net_foreignAid)[which(names(net_foreignAid) == "donornamee")] <- "Country"
 net_foreignAid$Country = as.character(net_foreignAid$Country)
 net_foreignAid = cleanAidCountryNames(net_foreignAid)
+
+#Creating `foreignAidRecipients` which shows the amount of aid each country received
+foreignAidRecipients = getRecipientDF()
 
 #Censorship data cleaning
 censorship = cleanCensorship(censorship)
@@ -55,6 +58,9 @@ for (country in net_foreignAid$Country){
 net_foreignAid = merge(x = net_foreignAid, y = wdi_frame, by = "Country", all.x = TRUE)
 censorship = merge(x = censorship, y = wdi_frame, by = "Country", all.x = TRUE)
 
+#print(intersect(net_foreignAid$Country, censorship$Country))
+#print(setdiff(net_foreignAid$Country, censorship$Country))
+#print(setdiff(censorship$Country, net_foreignAid$Country))
 if (FALSE){
 intersect(net_foreignAid$Country, wdi_frame$Country)
 setdiff(net_foreignAid$Country, wdi_frame$Country)
@@ -67,10 +73,15 @@ setdiff(censorship$Country, net_foreignAid$Country)
 intersect(censorship$Country, wdi_frame$Country)
 setdiff(censorship$Country, wdi_frame$Country)
 setdiff(wdi_frame$Country,censorship$Country)
+
+intersect(foreignAidRecipients$Country, wdi_frame$Country)
+setdiff(censorship$Country, foreignAidRecipients$Country)
+intersect(censorship$Country, foreignAidRecipients$Country)
 }
 
 #Now we write out our clean data
 write.csv(wdi_frame,cleanWDILoc, row.names = FALSE)
 write.csv(net_foreignAid, cleanForeignAidLoc, row.names = FALSE)
 write.csv(censorship, cleanCensorshipLoc, row.names = FALSE)
+write.csv(foreignAidRecipients, cleanForeignAidRecipientsLoc, row.names = FALSE )
                            

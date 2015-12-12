@@ -1,0 +1,90 @@
+---
+title: "FinalReport"
+author: "Alexander Danilychev Jr (23574348)"
+date: "December 10, 2015"
+output: html_document
+---
+
+Placeholder text woo
+
+## Sourcing and loading our dataframes
+
+```{r}
+library(ggplot2)
+source("graphHelper.R")
+resetPar <- function() {
+    dev.new()
+    op <- par(no.readonly = TRUE)
+    dev.off()
+    op
+}
+censorship = read.csv("../cleandata/censorship.csv")
+foreignAidDonors = read.csv("../cleandata/netForeignAid.csv")
+foreignAidRecipients = read.csv("../cleandata/foreignAidRecipients.csv")
+```
+
+####Countries in Censorship dataset:
+
+```{r}
+print(censorship$Country)
+```
+
+####Countries in ForeignAid Donors dataset:
+
+```{r}
+print(foreignAidDonors$Country)
+```
+
+####Countries in ForeignAid Recipients dataset:
+
+```{r}
+print(foreignAidRecipients$Country)
+```
+
+##Aid Graphs (by itself)
+
+####Spread of Foreign Aid Donors
+
+```{r}
+graphFullAid(foreignAidDonors)
+```
+
+####Graph of country and amount of aid given (just upper 3rd quartile)
+
+```{r}
+graphThirdQuartileAid(foreignAidDonors)
+```
+
+####Foreign Aid Recipient Full Spread
+
+```{r}
+fullForeignAidSpread(foreignAidRecipients)
+```
+
+####Top 10 ForeignAidRecipients
+```{r}
+tenHighestReceived(foreignAidRecipients)
+```
+
+####Frequencies of each kind of censorship
+
+```{r}
+
+highestCensorship(censorship, category = "Social")
+highestCensorship(censorship, category = "Political")
+highestCensorship(censorship, category = "Internet")
+highestCensorship(censorship, category = "Military")
+#Total censorship created by summing up the four categories as integers 1-4
+highestCensorship(censorship, category = "TotalCensorshipScore")
+```
+
+```{r}
+highestCensorship(censorship, category = "Social", "GDP_per_cap")
+highestCensorship(censorship, category = "Political", "GDP_per_cap")
+highestCensorship(censorship, category = "Internet", "GDP_per_cap")
+highestCensorship(censorship, category = "Military", "GDP_per_cap")
+```
+
+```{r}
+```
+

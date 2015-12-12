@@ -3,10 +3,27 @@
 
 source("code/cleanFuncs.R")
 
+addCombinedCensorship<- function(censorshipDF){
+   newCol = as.numeric(censorshipDF$Political)+
+            as.numeric(censorshipDF$Social)+
+            as.numeric(censorshipDF$Internet)+
+            as.numeric(censorshipDF$Military)
+   censorshipDF$TotalCensorshipScore = factor(newCol)
+   return(censorshipDF)
+}
+
 removeCountries <- function(censorshipDF, country_vec){
   censorshipDF = censorshipDF[!(censorshipDF$Country %in% country_vec),]
   row.names(censorshipDF) = 1:nrow(censorshipDF)
   return(censorshipDF)
+}
+
+renameCensorshipCols <- function(censorship){
+  colnames(censorship)[which(names(censorship) == "political_description")] <- "Political"
+  colnames(censorship)[which(names(censorship) == "social_description")] <- "Social"
+  colnames(censorship)[which(names(censorship) == "tools_description")] <- "Internet"
+  colnames(censorship)[which(names(censorship) == "conflict_security_description")] <- "Military"
+  return(censorship)
 }
 
 cleanCensorship <- function(censorshipDF){
@@ -22,8 +39,8 @@ cleanCensorship <- function(censorshipDF){
   #Drop appropriate rows
   censorshipDF = cleanCensorshipCountryNames(censorshipDF)
   censorshipDF = removeCountries(censorshipDF, c("Gaza and the West Bank", "Syria"))
- 
-  
+  censorshipDF = renameCensorshipCols(censorshipDF)
+  censorshipDF = addCombinedCensorship(censorshipDF)
   return(censorshipDF)
 }
 

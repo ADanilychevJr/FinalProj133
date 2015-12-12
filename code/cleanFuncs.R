@@ -44,3 +44,38 @@ cleanCensorshipCountryNames <- function(censorship){
   return(censorship)
 }
 
+
+
+removeRecipientCountries <- function(foreignAidRecipients){
+  rmCountries = c("Africa, regional",
+                  "America, regional", "South & Central Asia, regional",
+                  "West Indies, regional", "South of Sahara, regional",
+                  "North & Central America, regional",
+                  "North of Sahara, regional",
+                  "Bilateral, unspecified", "South Asia, regional",
+                  "Far East Asia, regional",
+                  "Middle East, regional", "C\xf4te d'Ivoire")
+  foreignAidRecipients = subset(foreignAidRecipients,!(Country %in% rmCountries))
+  foreignAidRecipients = foreignAidRecipients[-1,]
+  row.names(foreignAidRecipients) = 1:nrow(foreignAidRecipients)
+  return(foreignAidRecipients)
+}
+
+getRecipientDF <- function(){
+  foreignAid     = read.csv("rawdata/foreignAidRaw.csv")
+  foreignAid = subset(foreignAid, year == 2012)
+ 
+  dropped_cols = c("year","DonorCode","src", "RecipientCode", 
+                   "col", "incomegrid", "incomegrname", "rowname", "Row", 
+                   "Defl", "NatCur", "currencyname", "odaGNI", "colname",
+                   "share", "donornamee")
+  foreignAid = foreignAid[,!names(foreignAid) %in% dropped_cols]
+  
+  
+  colnames(foreignAid)[which(names(foreignAid) == "RecipientNameE")] <- "Country"
+  foreignAid = aggregate(foreignAid$Amount, by = list(Country = foreignAid$Country), sum)
+  colnames(foreignAid)[which(names(foreignAid) == "x")] <- "Amount"
+  foreignAid = removeRecipientCountries(foreignAid)
+  return(foreignAid)
+}
+

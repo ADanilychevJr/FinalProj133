@@ -12,8 +12,5 @@ source("code/downloadRaw.R")
 #This calls code/cleanData.R, executing all commands it contains
 source("code/cleanData.R") 
 
-head(censorship)
-str(censorship)
-str(foreignAid)
 
 
