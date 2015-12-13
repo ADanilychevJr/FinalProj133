@@ -1,13 +1,18 @@
 #133 Final Project README
 
-###Team
+##Team
 
 * Alex Danilychev Jr
 * Kristie Chang
 * Megan Otsuka
 * Rahul Shankar
 
-###Directories/Files
+##TLDR to run
+
+* Run **skeleton.R** which will create all needed directories, download all raw data, and clean all data
+* Knit **FinalReport.rmd** (which can be found in the code/ folder) to reproduce the report, and you're good to go
+
+##Directories/Files
 
 **skeleton.R** creates all directories, downloads all raw data, cleans all data
 
@@ -35,7 +40,7 @@
 * graphHelper.R     - This file contains all graphing functions. It's called by FinalReport.rmd
 * FinalReport.rmd   - This file reads in the cleaned data, calls graphHelper.R functions to create nice visuals/analysis
 
-###Data Sources
+##Data Sources
 
 **Censorship Data** We pulled our censorship data from [OpenNet](https://opennet.net/research/data)
 
@@ -44,13 +49,13 @@
 **Economic Indicator Data** We pulled our economic indicator data from the [World Bank](http://databank.worldbank.org/data/home.aspx) using the WDI library. This includes data on GDP, Population, Population Growth, and Tax Revenue. You can learn more [here](https://github.com/vincentarelbundock/WDI)
 
 
-###Extra Libraries Used
+##Extra Libraries Used
 
 [**World Bank Development Indicators for R**](https://github.com/vincentarelbundock/WDI)
 
 [**corrPlot**](https://cran.r-project.org/web/packages/corrplot/corrplot.pdf) 
 
-###Git Help
+##Git Help
 
 Run this ONCE `git clone https://github.com/ADanilychevJr/FinalProj133.git`
 
@@ -62,7 +67,7 @@ When you are satisfied that you finished work and want to send it to the master 
 * `git commit -m "some comment about what you added" `
 * `git push origin master` (This sends to Github)
 
-#####Extra commands: 
+###Extra commands: 
 
 To see your local status: 
 * `git status` (this shows you what has been changed, committed etc)
