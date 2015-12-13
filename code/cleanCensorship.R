@@ -42,7 +42,8 @@ cleanCensorship <- function(censorshipDF){
   
   #Drop appropriate rows
   censorshipDF = cleanCensorshipCountryNames(censorshipDF)
-  censorshipDF = removeCountries(censorshipDF, c("Gaza and the West Bank", "Syria"))
+  censorshipDF = removeCountries(censorshipDF, 
+                                 c("Gaza and the West Bank", "Syria"))
   censorshipDF = renameCensorshipCols(censorshipDF)
   censorshipDF = addCombinedCensorship(censorshipDF)
   return(censorshipDF)
