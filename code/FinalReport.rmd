@@ -1,8 +1,8 @@
 ---
-title: "FinalReport"
-author: "Alexander Danilychev Jr (23574348)"
+title: "Exploring Censorship and Foreign Aid"
+author: "Alexander Danilychev Jr, Kristie Chang, Megan Otsuka, Rahul Shankar"
 date: "December 10, 2015"
-output: html_document
+output: pdf_document
 ---
 ## Introduction
 
@@ -323,6 +323,12 @@ plotRecipientsVsCensorshipScore(censorship, foreignAidRecipients)
 The graph above shows a flat trendline, indicating little to no correlation between censorship score category and amount of aid received. Within the category of censorship score between 2.5 and 5, however, these countries seemed to have received the lowest amount of foreign aid on average. These countries include: Azerbaijian, Kazakhstan, Georgia and Kyrgzystan. 
 
 Looking at amount of aid received to GDP per capita, we noted that most countries with higher GDP per capita, or interpreted as countries with a higher average income per person, received little to no foreign aid. This insight was as expected, since wealthier and larger economies are probably more likely to not need additional foreign aid except in unexpected and extreme situations. However, we noted one outlier - Turkey, which had a censorship score of 6 and a GDP per capita of 10,646. 
+
+##Conclusion
+
+Overall, our team found that there is little evidence of a trend with respect to censorship and both amount donated and amount received. Although there is a slightly negative trend between censorship and amount donated, it is not very substantial. The trend would indicate that countries with higher censorship would donate less in aid. This could be due to the fact that the sample size of countries with censorship data is not very large, so the frequencies of countries that have some form of censorship are relatively small. We realized that having even more data would have helped in our analysis and confirming the existence of trends. Furthermore, we would hope to expand this project by continuing to investigate and profile the countries that were ranked highly for censorship and foreign aid. By delving deeper, perhaps we can find some clues that would indicate whether certain economic conditions would incentivize countries to have more censorship or have higher flows of aid. For example, life expectancy might be a good indicator to determine how developed a country is. We might expect that countries with high life expectancies have higher amounts of aid donated, versus countries with low life expectancies that receive more in aid.
+
+However, as a result of the project, our team learned to use data and information that is publicly available to test our theory of whether there was a relationship between foreign aid and censorship. Although we found little evidence to suggest that a trend exists, the process of going through the data, extracting the relevant information, and visually displaying the results was a great learning experience for the team. This project has given us the tools and confidence to use a data-driven approach to test whatever ideas we may have in the future.
 
 #Appendix (additional plots we enjoyed)
 
