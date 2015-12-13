@@ -120,6 +120,18 @@ createCensorAidIntersectDF <- function(censorship, foreignAidDonors){
    return(df)
 }
 
+createCensorAidRIntersectDF <- function(censorship, aidRecipients){
+  sect = intersect(aidRecipients$Country, censorship$Country)
+  censorship = subset(censorship, Country %in% sect)
+  aidRecipients = subset(aidRecipients, Country %in% sect)
+  df = data.frame(Country = censorship$Country,
+                  CensorshipScore = censorship$TotalCensorshipScore,
+                  Amount = aidRecipients$Amount,
+                  GDP_per_cap = censorship$GDP_per_cap,
+                  Population = censorship$Population)
+  return(df)
+}
+
 plotCensorshipDensity <- function(censorship){
   d<- ggplot(censorship, aes(x = TotalCensorshipScore))
   d + geom_density(fill = "#ff0000") +
@@ -135,6 +147,16 @@ plotDonorVsCensorshipScore <- function(censorship, foreignAidDonors){
      geom_point(aes(size = GDP_per_cap,color = factor(CensorshipScore))) +
      geom_smooth(method="lm", se = TRUE) + labs(y = "Aid Donated (USD)") + 
      ggtitle("Censorship score vs Amount Donated (USD)")
+}
+
+plotRecipientsVsCensorshipScore <- function(censorship, foreignAidRecipients){
+  df = createCensorAidRIntersectDF(censorship, foreignAidRecipients)
+  
+  d <- ggplot(df)
+  d + aes(x = CensorshipScore, y = Amount) + 
+    geom_point(aes(size = GDP_per_cap,color = factor(CensorshipScore))) +
+    geom_smooth(method="lm", se = TRUE) + labs(y = "Aid Received (USD)") + 
+    ggtitle("Censorship score vs Aid Received (USD)")
 }
 
 
