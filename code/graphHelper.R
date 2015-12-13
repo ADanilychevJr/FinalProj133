@@ -53,22 +53,20 @@ highestCensorship <- function(censorship, category, vs=FALSE){
   }
 }
 
+#Given the censorship DF and a category of censorship, plots a histogram of counts
 plotCensorshipSingle <- function(censorship, category){
-  
   col_scheme = brewer.pal(nlevels(censorship[[category]]), "YlOrRd")
   d <- ggplot(censorship) +  aes_string(x = category)
   d + geom_histogram(fill =col_scheme) +
     ggtitle(paste0(category, " Frequencies"))
 }
 
+#Plots countries that have atleast one censorship rating of "substantial". vs is the y-axis
 plotSubstantialCensorshipCountries <- function(censorship, vs = "GDP_per_cap"){
   highCensorshipCountries = subset(censorship, Political == "substantial" |
          Social == "substantial" |
          Internet == "substantial" | 
          Military == "substantial")
-  
-  
-  
   if(vs == "GDP_per_cap"){
      plotGDPperCapHighCensorship(highCensorshipCountries)
   } else if (vs == "Population"){
@@ -76,6 +74,7 @@ plotSubstantialCensorshipCountries <- function(censorship, vs = "GDP_per_cap"){
   } 
 }
 
+#Plots GDP per capita vs highCensorshipCountries as a histogram. 
 plotGDPperCapHighCensorship <- function(highCensorshipCountries){
   d<- ggplot(highCensorshipCountries)
   colors = c(rep("#ff0000", nrow(highCensorshipCountries)))
@@ -86,6 +85,7 @@ plotGDPperCapHighCensorship <- function(highCensorshipCountries){
   labs(title = "GDP per capita for Countries w/ Substantial Censorship")
 }
 
+#Plots Population vs highCensorshipCountries as a histogram. 
 plotPopHighCensorship <- function(highCensorshipCountries){
     d<- ggplot(highCensorshipCountries)
     colors = c(rep("#ffa500", nrow(highCensorshipCountries)))
@@ -96,6 +96,7 @@ plotPopHighCensorship <- function(highCensorshipCountries){
     labs(title = "Population for Countries w/ Substantial Censorship")
 }
 
+
 plotCensorshipVs<- function(censorship, category, vs){
   col_scheme = brewer.pal(nlevels(censorship[[category]]), "YlOrRd")
   d<- ggplot(censorship) 
@@ -104,6 +105,7 @@ plotCensorshipVs<- function(censorship, category, vs){
   ggtitle(paste0(category, " Censorship vs GDP per Capita"))
 }
 
+#Returns a correlation matrix of the columns of censorship. Tax column isn't included by default
 getCorrelationMatrix <- function(censorship, rmTax = TRUE){
   cols = c("Political", "Social", "Internet", "Military",
            "GDP_per_cap", "Population", "PopGrowth")
@@ -116,12 +118,15 @@ getCorrelationMatrix <- function(censorship, rmTax = TRUE){
   return(cor(censorship))
 }
 
+#Takes in the censorship df, boolean indicating whether to include taxes, and a method 
+#Plots a correlation matrix
 plotCorrMatrix <- function(censorship, rmTax, method){
-  
   corr_matrix = getCorrelationMatrix(censorship, rmTax)
   corrplot(corr_matrix, method = method)
 }
 
+#Takes in the censorship and foreignAidDonors dataframes and 
+#returns a merged version that only includes countries in the intersection
 createCensorAidIntersectDF <- function(censorship, foreignAidDonors){
    sect = intersect(foreignAidDonors$Country, censorship$Country)
    censorship = subset(censorship, Country %in% sect)
@@ -134,6 +139,8 @@ createCensorAidIntersectDF <- function(censorship, foreignAidDonors){
    return(df)
 }
 
+#Takes in the censorship and foreignAidRecipients dataframes and 
+#returns a merged version that only includes countries in the intersection
 createCensorAidRIntersectDF <- function(censorship, aidRecipients){
   sect = intersect(aidRecipients$Country, censorship$Country)
   censorship = subset(censorship, Country %in% sect)
@@ -146,6 +153,7 @@ createCensorAidRIntersectDF <- function(censorship, aidRecipients){
   return(df)
 }
 
+#Plots a density curve of the cumulative censorship distribution
 plotCensorshipDensity <- function(censorship){
   d<- ggplot(censorship, aes(x = TotalCensorshipScore))
   d + geom_density(fill = "#ff0000") +
@@ -153,24 +161,31 @@ plotCensorshipDensity <- function(censorship){
     ggtitle("Density curve of Total Censorship Score")
 }
 
+#Plots total Censorship score vs aid donated for countries that donated aid
 plotDonorVsCensorshipScore <- function(censorship, foreignAidDonors){
    df = createCensorAidIntersectDF(censorship, foreignAidDonors)
    
    d <- ggplot(df)
    d + aes(x = CensorshipScore, y = AmountDonated) + 
-     geom_point(aes(size = GDP_per_cap,color = factor(CensorshipScore))) +
-     geom_smooth(method="lm", se = TRUE) + labs(y = "Aid Donated (USD)") + 
-     ggtitle("Censorship score vs Amount Donated (USD)")
+     geom_point(aes(size = GDP_per_cap,color = CensorshipScore)) +
+     geom_smooth(method="lm", se = TRUE) + labs(y = "Aid Donated (USD)", size = "GDP per Capita (USD)") + 
+     ggtitle("Censorship score vs Amount Donated (USD)") + 
+     scale_colour_continuous(name = "Censorship Score", low = "#33cc00", high = "#ff0000",
+                             labels = c("no evidence", "pervasive", "selective", "substantial"),
+                             breaks = c(0,2.7,5.3,8)) 
 }
 
+#Plots total Censorship score vs aid received for countries that received aid
 plotRecipientsVsCensorshipScore <- function(censorship, foreignAidRecipients){
   df = createCensorAidRIntersectDF(censorship, foreignAidRecipients)
-  
   d <- ggplot(df)
   d + aes(x = CensorshipScore, y = Amount) + 
-    geom_point(aes(size = GDP_per_cap,color = factor(CensorshipScore))) +
-    geom_smooth(method="lm", se = TRUE) + labs(y = "Aid Received (USD)") + 
-    ggtitle("Censorship score vs Aid Received (USD)")
+    geom_point(aes(size = GDP_per_cap,color = CensorshipScore)) +
+    geom_smooth(method="lm", se = TRUE) + labs(y = "Aid Received (USD)",size = "GDP per Capita (USD)") + 
+    ggtitle("Censorship score vs Aid Received (USD)") + 
+    scale_colour_continuous(name = "Censorship Score", low = "#33cc00", high = "#ff0000",
+                      labels = c("no evidence", "pervasive", "selective", "substantial"),
+                      breaks = c(0,2.7,5.3,8)) 
 }
 
 

@@ -139,8 +139,5 @@ plotDonorVsCensorshipScore(censorship, foreignAidDonors)
 ```
 
 ```{r}
-#str(foreignAidRecipients)
 plotRecipientsVsCensorshipScore(censorship, foreignAidRecipients)
 ```
-
-TODO: Compare censorship for countries that gave or didn't give aid
