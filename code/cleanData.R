@@ -59,9 +59,12 @@ for (country in net_foreignAid$Country){
 }
 
 #Merge in WDI information to foreignAid
-net_foreignAid = merge(x = net_foreignAid, y = wdi_frame, by = "Country", all.x = TRUE)
-net_foreignAid = merge(x = net_foreignAid, y = wdi_frame2, by = "Country", all.x = TRUE)
-net_foreignAid = merge(x = net_foreignAid, y = wdi_frame3, by = "Country", all.x = TRUE)
+net_foreignAid = merge(x = net_foreignAid, y = wdi_frame, 
+                       by = "Country", all.x = TRUE)
+net_foreignAid = merge(x = net_foreignAid, y = wdi_frame2, 
+                       by = "Country", all.x = TRUE)
+net_foreignAid = merge(x = net_foreignAid, y = wdi_frame3, 
+                       by = "Country", all.x = TRUE)
 #Merge censorship data with WDI data
 censorship = merge(x = censorship, y = wdi_frame, by = "Country", all.x = TRUE)
 censorship = merge(x = censorship, y = wdi_frame2, by = "Country", all.x = TRUE)
@@ -73,5 +76,5 @@ censorship = merge(x = censorship, y = wdi_frame3, by = "Country", all.x = TRUE)
 write.csv(wdi_frame,cleanWDILoc, row.names = FALSE)
 write.csv(net_foreignAid, cleanForeignAidLoc, row.names = FALSE)
 write.csv(censorship, cleanCensorshipLoc, row.names = FALSE)
-write.csv(foreignAidRecipients, cleanForeignAidRecipientsLoc, row.names = FALSE )
+write.csv(foreignAidRecipients, cleanForeignAidRecipientsLoc, row.names = FALSE)
                            
