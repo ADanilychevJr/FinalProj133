@@ -14,7 +14,7 @@
 **rawdata/** contains the raw data. This is created and populated on the fly by skeleton.R
 * censorshipRaw.csv - This contains all censorship data, found [**here**](https://opennet.net/research/data)
 * foreignAidRaw.csv - Contains all foreign aid data. Check Data Sources section for more info
-* gdpGrowth.csv - This is a data frame with stats on gdpGrowth
+* gdpGrowth.csv - This is a data frame with stats on gdpGrowth **(from WDI)**
 * gdpPerCapUSD.csv - Contains stats on gdpPerCapita **(from WDI)**
 * gdpUSD.csv - Contains GDP numbers **(from WDI)**
 * populations.csv - Contains population counts for all countries **(from WDI)**
@@ -41,7 +41,7 @@
 
 **Foreign Aid Data** We pulled our data for foreign aid from the [Organisation for Economic Co-operation and Development](http://www.oecd.org/dac/stats/aid-at-a-glance.htm)
 
-**Economic Indicator Data** We pulled our economic indicator data from the [World Bank](http://databank.worldbank.org/data/home.aspx) using the WDI library. You can learn more [here](https://github.com/vincentarelbundock/WDI)
+**Economic Indicator Data** We pulled our economic indicator data from the [World Bank](http://databank.worldbank.org/data/home.aspx) using the WDI library. This includes data on GDP, Population, Population Growth, and Tax Revenue. You can learn more [here](https://github.com/vincentarelbundock/WDI)
 
 **Syrian Refugee Data** We pulled our data regarding Syrian Refugee admittance from [UNHCR](http://data.unhcr.org/syrianrefugees/asylum.php). We converted the data from pdf to csv and hosted it. 
 
