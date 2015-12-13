@@ -74,9 +74,9 @@ graphThirdQuartileAid(foreignAidDonors)
 fullForeignAidSpread(foreignAidRecipients)
 ```
 
-####Top 10 ForeignAidRecipients
+####Top 14 ForeignAidRecipients
 ```{r}
-tenHighestReceived(foreignAidRecipients)
+fourteenHighestReceived(foreignAidRecipients)
 ```
 
 ####Frequencies of each kind of censorship

@@ -10,7 +10,7 @@ graphFullAid <- function(foreignAid){
   d <- ggplot(foreignAid, aes(y = Amount, x = reorder(Country, Amount)))
   d+ geom_histogram(stat = "identity", fill = colors) + 
     labs(y = "Donated Aid (m USD)", x = "Country (names omitted)") +
-    theme(axis.text.x = element_blank())
+    theme(axis.text.x = element_blank()) + ggtitle("All Donated Aid Histogram")
 }
 
 #
@@ -22,16 +22,16 @@ graphThirdQuartileAid <- function(foreignAid){
   colors = c(rep("#0099FF",nrow(upper_third_subset)))
   d+ geom_histogram(stat = "identity", fill = colors) +
     labs(y = "Donated Aid (m USD)", x = "Country") +
-    theme(axis.text.x = element_text(angle = 325))
+    theme(axis.text.x = element_text(angle = 325)) + ggtitle("Upper Quartile of Aid Donors")
 }
 
-tenHighestReceived <- function(foreignAid){
-  top10 = foreignAid[nrow(foreignAid) - rank(foreignAid$Amount) <= 13,]
-  d <- ggplot(top10, aes(y = Amount, 
+fourteenHighestReceived <- function(foreignAid){
+  top14 = foreignAid[nrow(foreignAid) - rank(foreignAid$Amount) <= 13,]
+  d <- ggplot(top14, aes(y = Amount, 
                                       x = reorder(Country, Amount)))
-  colors = c(rep("#33cc00",nrow(top10)))
+  colors = c(rep("#33cc00",nrow(top14)))
   d+ geom_histogram(stat = "identity", fill = colors) + labs(y = "Received Aid (m USD)", x = "Country") +
-    theme(axis.text.x = element_text(angle = 325))
+    theme(axis.text.x = element_text(angle = 325)) + ggtitle("Fourteen Highest Aid Recipients")
 }
 
 fullForeignAidSpread <- function(foreignAid){
@@ -39,7 +39,7 @@ fullForeignAidSpread <- function(foreignAid){
                          x = reorder(Country, Amount)))
   colors = c(rep("#33cc00",nrow(foreignAid)))
   d+ geom_histogram(stat = "identity", fill = colors) + labs(y = "Received Aid (m USD)", x = "Country") +
-    theme(axis.text.x = element_blank())
+    theme(axis.text.x = element_blank()) + ggtitle("Histogram of Aid Received per Country (all)")
 }
 
 highestCensorship <- function(censorship, category, vs=FALSE){
@@ -58,7 +58,7 @@ plotCensorshipSingle <- function(censorship, category){
   col_scheme = brewer.pal(nlevels(censorship[[category]]), "YlOrRd")
   d <- ggplot(censorship) +  aes_string(x = category)
   d + geom_histogram(fill =col_scheme) +
-    ggtitle(paste0(category, " Frequencies"))
+    ggtitle(paste0(category, " Censorship Frequencies"))
 }
 
 #Plots countries that have atleast one censorship rating of "substantial". vs is the y-axis
@@ -96,7 +96,7 @@ plotPopHighCensorship <- function(highCensorshipCountries){
     labs(title = "Population for Countries w/ Substantial Censorship")
 }
 
-
+#Plots censorship from a certain category versus another column (vs) for each country
 plotCensorshipVs<- function(censorship, category, vs){
   col_scheme = brewer.pal(nlevels(censorship[[category]]), "YlOrRd")
   d<- ggplot(censorship) 
