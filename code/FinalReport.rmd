@@ -244,7 +244,7 @@ plotCorrMatrix(censorship, rmTax = FALSE, method = "ellipse")
 intersect(foreignAidDonors$Country, censorship$Country)
 print(paste0("Highest censorship rating for any country that sent foreign Aid:  ",
              max(censorshipAidDonorIntersect$CensorshipScore)))
-plotCensorshipDensity(censorship)
+
 ```
 ###Censorship vs. Foreign Aid Donated
 ```{r}
@@ -267,5 +267,5 @@ Looking at amount of aid received to GDP per capita, we noted that most countrie
 plotCensorshipVs(censorship, "Social","GDP_per_cap")
 plotCensorshipVs(censorship, "Political","GDP_per_cap")
 plotCensorshipVs(censorship, "Internet","GDP_per_cap")
-#plotCensorshipVs(censorship, "Military","GDP_per_cap")
+plotCensorshipDensity(censorship)
 ```
