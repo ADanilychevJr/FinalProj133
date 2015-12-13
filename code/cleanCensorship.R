@@ -8,6 +8,7 @@ addCombinedCensorship<- function(censorshipDF){
             as.numeric(censorshipDF$Social)+
             as.numeric(censorshipDF$Internet)+
             as.numeric(censorshipDF$Military)
+   newCol = newCol - 4
    censorshipDF$TotalCensorshipScore = factor(newCol)
    return(censorshipDF)
 }

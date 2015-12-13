@@ -108,5 +108,34 @@ plotCorrMatrix <- function(censorship, rmTax, method){
   corrplot(corr_matrix, method = method)
 }
 
+createCensorAidIntersectDF <- function(censorship, foreignAidDonors){
+   sect = intersect(foreignAidDonors$Country, censorship$Country)
+   censorship = subset(censorship, Country %in% sect)
+   foreignAidDonors = subset(foreignAidDonors, Country %in% sect)
+   df = data.frame(Country = censorship$Country,
+                   CensorshipScore = censorship$TotalCensorshipScore,
+                   AmountDonated = foreignAidDonors$Amount,
+                   GDP_per_cap = censorship$GDP_per_cap,
+                   Population = censorship$Population)
+   return(df)
+}
+
+plotCensorshipDensity <- function(censorship){
+  d<- ggplot(censorship, aes(x = TotalCensorshipScore))
+  d + geom_density(fill = "#ff0000") +
+    geom_vline(xintercept = median(censorship$TotalCensorshipScore)) + 
+    ggtitle("Density curve of Total Censorship Score")
+}
+
+plotDonorVsCensorshipScore <- function(censorship, foreignAidDonors){
+   df = createCensorAidIntersectDF(censorship, foreignAidDonors)
+   
+   d <- ggplot(df)
+   d + aes(x = CensorshipScore, y = AmountDonated) + 
+     geom_point(aes(size = GDP_per_cap,color = factor(CensorshipScore))) +
+     geom_smooth(method="lm", se = TRUE) + labs(y = "Aid Donated (USD)") + 
+     ggtitle("Censorship score vs Amount Donated (USD)")
+}
+
 
 

@@ -34,7 +34,7 @@ resetPar <- function() {
 censorship = read.csv("../cleandata/censorship.csv")
 foreignAidDonors = read.csv("../cleandata/netForeignAid.csv")
 foreignAidRecipients = read.csv("../cleandata/foreignAidRecipients.csv")
-
+censorshipAidDonorIntersect = createCensorAidIntersectDF(censorship, foreignAidDonors)
 ```
 
 ####Countries in Censorship dataset:
@@ -124,5 +124,19 @@ plotCorrMatrix(censorship, rmTax = TRUE, method = "shade")
 ```{r}
 plotSubstantialCensorshipCountries(censorship, "GDP_per_cap")
 plotSubstantialCensorshipCountries(censorship, "Population")
-plotSubstantialCensorshipCountries(censorship, "Tax_Revenue")
 ```
+
+####Countries that we have censorship AND donor data for:
+
+```{r}
+intersect(foreignAidDonors$Country, censorship$Country)
+print(paste0("Highest censorship rating for any country that sent foreign Aid:  ",
+             max(censorshipAidDonorIntersect$CensorshipScore)))
+plotCensorshipDensity(censorship)
+```
+
+```{r}
+plotDonorVsCensorshipScore(censorship, foreignAidDonors)
+```
+
+TODO: Compare censorship for countries that gave or didn't give aid
