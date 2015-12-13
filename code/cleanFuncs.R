@@ -77,7 +77,8 @@ getRecipientDF <- function(){
   foreignAid = foreignAid[,!names(foreignAid) %in% dropped_cols]
   
   colnames(foreignAid)[which(names(foreignAid) == "RecipientNameE")] <- "Country"
-  foreignAid = aggregate(foreignAid$Amount, by = list(Country = foreignAid$Country), sum)
+  foreignAid = aggregate(foreignAid$Amount, 
+                         by = list(Country = foreignAid$Country), sum)
   colnames(foreignAid)[which(names(foreignAid) == "x")] <- "Amount"
   foreignAid = removeRecipientCountries(foreignAid)
   return(foreignAid)
