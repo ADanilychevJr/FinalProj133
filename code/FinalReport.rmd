@@ -17,123 +17,95 @@ The World Bank’s Economic Indicator Data
 
 Censorship data was pulled from Open Net Initiative, which ranked the severity of censorship across four general themes for only 74 countries: political, social, Internet tools, and conflict/security. The rankings are as follows: 0 = no evidence, 2 = selective, 3 = substantial, 4 = pervasive. The study was last updated September 30, 2013. Open Net Initiative also provided descriptive profiles of each country selected. It is key to note that this study was not globally comprehensive; thus, in our interaction analysis we only looked at the subset of countries present in all data sets. As such, Syria and Gaza were removed from our use of this dataset, bringing the total number of countries to 72. 
 
-Relevant Data Labels
-Column Name
-Variables & Description
-country_code
-A unique two-letter ID given to each country.
-country
-Full name of country.
-political_score
-The scores reflect the observed level of filtering; focused primarily on Web sites that express views in opposition to those of the current government. Content more broadly related to human rights, freedom of expression, minority rights, and religious movements is also considered here.
-Variables:
-0 - ONI testing did not uncover an evidence of websites being blocked.
-1 - Connectivity abnormalities are present that suggest the presence of filtering, although diagnostic work was unable to confirm conclusively that inaccessible websites are the result of deliberate tampering.
-2 - Narrowly targeted filtering that blocks a small number of specific sites across a few categories or filtering that targets a single category or issue.
-3 - Filtering that has either depth or breadth: either a number of categories are subject to a medium level of filtering or a low level of filtering is carried out across many categories.
-4 - Filtering that is categorized by both its depth - a blocking regime that blocks a large portion of the targeted content in a given category - and its breadth - a blocking regime that includes filtering in several categories in a given theme.
-political_description
-Variables:
-no evidence - political_score of 0
-suspected - political_score of 1
-selective - political_score of 2
-substantial - political_score of 3
-pervasive - political_score of 4
-social_score
-The scores reflect the observed level of filtering; covers material related to sexuality, gambling, and illegal drugs and alcohol, as well as other topics that may be socially sensitive or perceived as offensive.
-Variables:
-0 - ONI testing did not uncover an evidence of websites being blocked.
-1 - Connectivity abnormalities are present that suggest the presence of filtering, although diagnostic work was unable to confirm conclusively that inaccessible websites are the result of deliberate tampering.
-2 - Narrowly targeted filtering that blocks a small number of specific sites across a few categories or filtering that targets a single category or issue.
-3 - Filtering that has either depth or breadth: either a number of categories are subject to a medium level of filtering or a low level of filtering is carried out across many categories.
-4 - Filtering that is categorized by both its depth - a blocking regime that blocks a large portion of the targeted content in a given category - and its breadth - a blocking regime that includes filtering in several categories in a given theme.
-social_description
-Variables:
-no evidence - social_score of 0
-suspected - social_score of 1
-selective - social_score of 2
-substantial - social_score of 3
-pervasive - social_score of 4
-tools_score
-The scores reflect the observed level of filtering; web sites that provide e-mail, Internet hosting, search, translation, Voice-over Internet Protocol (VoIP) telephone service, and circumvention methods are grouped in this category.
-Variables:
-0 - ONI testing did not uncover an evidence of websites being blocked.
-1 - Connectivity abnormalities are present that suggest the presence of filtering, although diagnostic work was unable to confirm conclusively that inaccessible websites are the result of deliberate tampering.
-2 - Narrowly targeted filtering that blocks a small number of specific sites across a few categories or filtering that targets a single category or issue.
-3 - Filtering that has either depth or breadth: either a number of categories are subject to a medium level of filtering or a low level of filtering is carried out across many categories.
-4 - Filtering that is categorized by both its depth - a blocking regime that blocks a large portion of the targeted content in a given category - and its breadth - a blocking regime that includes filtering in several categories in a given theme.
-tools_description
-Variables:
-no evidence - tools_score of 0
-suspected - tools_score of 1
-selective - tools_score of 2
-substantial - tools_score of 3
-pervasive - tools_score of 4
-conflict/security_score
-The scores reflect the observed level of filtering; content related to armed conflicts, border disputes, separatist movements, and militant groups is included in this category.
-Variables:
-0 - ONI testing did not uncover an evidence of websites being blocked.
-1 - Connectivity abnormalities are present that suggest the presence of filtering, although diagnostic work was unable to confirm conclusively that inaccessible websites are the result of deliberate tampering.
-2 - Narrowly targeted filtering that blocks a small number of specific sites across a few categories or filtering that targets a single category or issue.
-3 - Filtering that has either depth or breadth: either a number of categories are subject to a medium level of filtering or a low level of filtering is carried out across many categories.
-4 - Filtering that is categorized by both its depth - a blocking regime that blocks a large portion of the targeted content in a given category - and its breadth - a blocking regime that includes filtering in several categories in a given theme.
-conflict_security_description
-Variables:
-no evidence - conflict/security_score of 0
-suspected - conflict/security_score of 1
-selective - conflict/security_score of 2
-substantial - conflict/security_score of 3
-pervasive - conflict/security_score of 4
-transparency
-A qualitative measure based on the level at which the country openly engages in filtering.
-Variables:
-low
-medium
-high
-consistency
-The variation in filtering within a country across different ISPs - in some cases the availability of specific Web pages differs significantly depending on the ISP one uses to connect the the Internet.
-Variables:
-low
-medium
-high
-testing_date
-Year tested
-url
-Link to each country profile
+| Column Name                   | Variables & Description                                                                                                                                                                                                                                                                        |
+|-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| country_code                  | A unique two-letter ID given to each country.                                                                                                                                                                                                                                                  |
+| country                       | Full name of country.                                                                                                                                                                                                                                                                          |
+| political_score               | The scores reflect the observed level of filtering; focused primarily on Web sites that express views in opposition to those of the current government. Content more broadly related to human rights, freedom of expression, minority rights, and religious movements is also considered here. |
+|                               | Variables:                                                                                                                                                                                                                                                                                     |
+|                               | 0 - ONI testing did not uncover an evidence of websites being blocked.                                                                                                                                                                                                                         |
+|                               | 1 - Connectivity abnormalities are present that suggest the presence of filtering, although diagnostic work was unable to confirm conclusively that inaccessible websites are the result of deliberate tampering.                                                                              |
+|                               | 2 - Narrowly targeted filtering that blocks a small number of specific sites across a few categories or filtering that targets a single category or issue.                                                                                                                                     |
+|                               | 3 - Filtering that has either depth or breadth: either a number of categories are subject to a medium level of filtering or a low level of filtering is carried out across many categories.                                                                                                    |
+|                               | 4 - Filtering that is categorized by both its depth - a blocking regime that blocks a large portion of the targeted content in a given category - and its breadth - a blocking regime that includes filtering in several categories in a given theme.                                          |
+| political_description         | Variables:                                                                                                                                                                                                                                                                                     |
+|                               | no evidence - political_score of 0                                                                                                                                                                                                                                                             |
+|                               | suspected - political_score of 1                                                                                                                                                                                                                                                               |
+|                               | selective - political_score of 2                                                                                                                                                                                                                                                               |
+|                               | substantial - political_score of 3                                                                                                                                                                                                                                                             |
+|                               | pervasive - political_score of 4                                                                                                                                                                                                                                                               |
+| social_score                  | The scores reflect the observed level of filtering; covers material related to sexuality, gambling, and illegal drugs and alcohol, as well as other topics that may be socially sensitive or perceived as offensive.                                                                           |
+|                               | Variables:                                                                                                                                                                                                                                                                                     |
+|                               | 0 - ONI testing did not uncover an evidence of websites being blocked.                                                                                                                                                                                                                         |
+|                               | 1 - Connectivity abnormalities are present that suggest the presence of filtering, although diagnostic work was unable to confirm conclusively that inaccessible websites are the result of deliberate tampering.                                                                              |
+|                               | 2 - Narrowly targeted filtering that blocks a small number of specific sites across a few categories or filtering that targets a single category or issue.                                                                                                                                     |
+|                               | 3 - Filtering that has either depth or breadth: either a number of categories are subject to a medium level of filtering or a low level of filtering is carried out across many categories.                                                                                                    |
+|                               | 4 - Filtering that is categorized by both its depth - a blocking regime that blocks a large portion of the targeted content in a given category - and its breadth - a blocking regime that includes filtering in several categories in a given theme.                                          |
+| social_description            | Variables:                                                                                                                                                                                                                                                                                     |
+|                               | no evidence - social_score of 0                                                                                                                                                                                                                                                                |
+|                               | suspected - social_score of 1                                                                                                                                                                                                                                                                  |
+|                               | selective - social_score of 2                                                                                                                                                                                                                                                                  |
+|                               | substantial - social_score of 3                                                                                                                                                                                                                                                                |
+|                               | pervasive - social_score of 4                                                                                                                                                                                                                                                                  |
+| tools_score                   | The scores reflect the observed level of filtering; web sites that provide e-mail, Internet hosting, search, translation, Voice-over Internet Protocol (VoIP) telephone service, and circumvention methods are grouped in this category.                                                       |
+|                               | Variables:                                                                                                                                                                                                                                                                                     |
+|                               | 0 - ONI testing did not uncover an evidence of websites being blocked.                                                                                                                                                                                                                         |
+|                               | 1 - Connectivity abnormalities are present that suggest the presence of filtering, although diagnostic work was unable to confirm conclusively that inaccessible websites are the result of deliberate tampering.                                                                              |
+|                               | 2 - Narrowly targeted filtering that blocks a small number of specific sites across a few categories or filtering that targets a single category or issue.                                                                                                                                     |
+|                               | 3 - Filtering that has either depth or breadth: either a number of categories are subject to a medium level of filtering or a low level of filtering is carried out across many categories.                                                                                                    |
+|                               | 4 - Filtering that is categorized by both its depth - a blocking regime that blocks a large portion of the targeted content in a given category - and its breadth - a blocking regime that includes filtering in several categories in a given theme.                                          |
+| tools_description             | Variables:                                                                                                                                                                                                                                                                                     |
+|                               | no evidence - tools_score of 0                                                                                                                                                                                                                                                                 |
+|                               | suspected - tools_score of 1                                                                                                                                                                                                                                                                   |
+|                               | selective - tools_score of 2                                                                                                                                                                                                                                                                   |
+|                               | substantial - tools_score of 3                                                                                                                                                                                                                                                                 |
+|                               | pervasive - tools_score of 4                                                                                                                                                                                                                                                                   |
+| conflict/security_score       | The scores reflect the observed level of filtering; content related to armed conflicts, border disputes, separatist movements, and militant groups is included in this category.                                                                                                               |
+|                               | Variables:                                                                                                                                                                                                                                                                                     |
+|                               | 0 - ONI testing did not uncover an evidence of websites being blocked.                                                                                                                                                                                                                         |
+|                               | 1 - Connectivity abnormalities are present that suggest the presence of filtering, although diagnostic work was unable to confirm conclusively that inaccessible websites are the result of deliberate tampering.                                                                              |
+|                               | 2 - Narrowly targeted filtering that blocks a small number of specific sites across a few categories or filtering that targets a single category or issue.                                                                                                                                     |
+|                               | 3 - Filtering that has either depth or breadth: either a number of categories are subject to a medium level of filtering or a low level of filtering is carried out across many categories.                                                                                                    |
+|                               | 4 - Filtering that is categorized by both its depth - a blocking regime that blocks a large portion of the targeted content in a given category - and its breadth - a blocking regime that includes filtering in several categories in a given theme.                                          |
+| conflict_security_description | Variables:                                                                                                                                                                                                                                                                                     |
+|                               | no evidence - conflict/security_score of 0                                                                                                                                                                                                                                                     |
+|                               | suspected - conflict/security_score of 1                                                                                                                                                                                                                                                       |
+|                               | selective - conflict/security_score of 2                                                                                                                                                                                                                                                       |
+|                               | substantial - conflict/security_score of 3                                                                                                                                                                                                                                                     |
+|                               | pervasive - conflict/security_score of 4                                                                                                                                                                                                                                                       |
+| transparency                  | A qualitative measure based on the level at which the country openly engages in filtering.                                                                                                                                                                                                     |
+|                               | Variables:                                                                                                                                                                                                                                                                                     |
+|                               | low                                                                                                                                                                                                                                                                                            |
+|                               | medium                                                                                                                                                                                                                                                                                         |
+|                               | high                                                                                                                                                                                                                                                                                           |
+| consistency                   | The variation in filtering within a country across different ISPs - in some cases the availability of specific Web pages differs significantly depending on the ISP one uses to connect the the Internet.                                                                                      |
+|                               | Variables:                                                                                                                                                                                                                                                                                     |
+|                               | low                                                                                                                                                                                                                                                                                            |
+|                               | medium                                                                                                                                                                                                                                                                                         |
+|                               | high                                                                                                                                                                                                                                                                                           |
+| testing_date                  | Year tested                                                                                                                                                                                                                                                                                    |
+| url                           | Link to each country profile    
 
 Foreign aid data was retrieved from the OECD. The DAC List of ODA Recipients details the countries and territories that are eligible to receive official development assistance (ODA). The DAC Secretariat collects aid statistics from countries and donors. The online databases for the flows of aid are updated four times every year. The data that we used for our project is the underlying data that describes the aid (ODA) flows, detailing how much a country received in foreign aid and how much a country donated in foreign aid. The data for foreign aid was for the year 2012.
 
-Relevant Data Labels
-Column Name
-Variables & Description
-donornamee
-Name of country donating foreign aid
-RecipientNameE
-Name of country receiving foreign aid
-Amount
-Total dollar amount in millions of foreign aid exchanged between donornamee and RecipientNameE
+| Column Name    | Variables & Description                                                                        |
+|----------------|------------------------------------------------------------------------------------------------|
+| donornamee     | Name of country donating foreign aid                                                           |
+| RecipientNameE | Name of country receiving foreign aid                                                          |
+| Amount         | Total dollar amount in millions of foreign aid exchanged between donornamee and RecipientNameE |
 
 The economic indicators of GDP per capita, population, population growth and tax revenue were pulled from the World Bank. This data was last updated as of November 12, 2015. We acknowledged the disparity in time periods in which the data has been pulled; accordingly, we pulled data from the year 2012 to match the foreign aid study. We were unable to directly match the time periods of these two data sets to that of the censorship study given the nature of OpenNet Initiative's approach; thus, given the constraints of public databases available, we chose to move forward with our analysis. 
 
-Relevant Data Labels
-Column Name
-Variables & Description
-iso2c
-A unique two-letter or -integer ID given to each country.
-country
-Full name of country.
-year
-Year of information.
-NY.GDP.MKTP.CD
-GDP. Measures the monetary value of all the finished goods and services produced within a country's borders in a specific time period. 
-NY.GDP.PCAP.CD
-GDP per capita. Measures average income per person.
-SP.POP.TOTL
-Measures size of population.
-GC.TAX.TOTL.GD.ZS
-Measures tax revenue received by national government.
-NY.GDP.MKTP.KD.ZG
-Measures year over year population growth from 2011-2012.
+| Column Name       | Variables & Description                                                                                                                |
+|-------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| iso2c             | A unique two-letter or -integer ID given to each country.                                                                              |
+| country           | Full name of country.                                                                                                                  |
+| year              | Year of information.                                                                                                                   |
+| NY.GDP.MKTP.CD    | GDP. Measures the monetary value of all the finished goods and services produced within a country's borders in a specific time period. |
+| NY.GDP.PCAP.CD    | GDP per capita. Measures average income per person.                                                                                    |
+| SP.POP.TOTL       | Measures size of population.                                                                                                           |
+| GC.TAX.TOTL.GD.ZS | Measures tax revenue received by national government.                                                                                  |
+| NY.GDP.MKTP.KD.ZG | Measures year over year population growth from 2011-2012. 
 
 ## Data Extraction and Cleanup (Methodology)
 Under the file constants.R, we kept a reference of all of the string URL’s and relative paths of raw and clean data, along with the codes for some of the economic indicators we used. Under downloadRaw.R, we downloaded of all of our raw data through download.file in the case of censorship and foreign aid, and used the R package ‘WDI’ to download our data regarding the World Bank Economic Indicators. Under this file, we also limited the time frame of WDI economic indicators to 2012. This was to tie our datasets together reasonably in time. Our main data-cleaning script was cleanData.R, which sourced other R cleaning scripts like cleanFuncs.R and cleanCensorship.R.
