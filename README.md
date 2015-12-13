@@ -7,6 +7,12 @@
 * Megan Otsuka
 * Rahul Shankar
 
+##Description
+
+Our team got the idea for the project through a policy debate held by The Guardian newspaper several years ago regarding the relationship between __censorship__ and __foreign aid__. The debate focused on the importance of transparency with respect to foreign aid and how that would have an impact on government censorship and surveillance. Our team wanted to analyze this debate from a data-driven perspective. Consequently, the goal of our project was to determine the relationship between censorship and foreign aid in given countries. Specifically, we hypothesize that countries that heavily censor their constituents will likely not be high contributors of foreign aid to distressed countries.
+
+Within this study, we saught to provide an overview of censorship by type and frequency amongst countries included in the Open Net Initiative’s censorship study. Then, we analyzed the key contributors and economic indicators for both foreign aid recipients and foreign aid donors. Finally, given prior contextual information, we delved further into the relationship between foreign aid recipients and donors with their respective levels and types of censorship.
+
 ##TLDR to run
 
 * Run **skeleton.R** which will create all needed directories, download all raw data, and clean all data
