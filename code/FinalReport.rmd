@@ -2,7 +2,7 @@
 title: "FinalReport"
 author: "Alexander Danilychev Jr (23574348)"
 date: "December 10, 2015"
-output: pdf_document
+output: html_document
 ---
 ## Introduction
 
@@ -187,7 +187,8 @@ resetPar <- function() {
 censorship = read.csv("../cleandata/censorship.csv")
 foreignAidDonors = read.csv("../cleandata/netForeignAid.csv")
 foreignAidRecipients = read.csv("../cleandata/foreignAidRecipients.csv")
-censorshipAidDonorIntersect = createCensorAidIntersectDF(censorship, foreignAidDonors)
+censorshipAidDonorIntersect = createCensorAidIntersectDF(censorship, 
+                                                         foreignAidDonors)
 ```
 
 ####Countries in Censorship Dataset:
@@ -198,11 +199,15 @@ print(censorship$Country)
 
 ####Countries in ForeignAid Donors Dataset:
 
+Out of 196 countries, 43 countries donated foreign aid to other countries. The 43 countries are listed below:
+
 ```{r}
 print(foreignAidDonors$Country)
 ```
 
 ####Countries in ForeignAid Recipients Dataset:
+
+Out of 196 countries, 153 countries received foreign aid from other countries. The 153 countries are listed below:
 
 ```{r}
 print(foreignAidRecipients$Country)
@@ -222,8 +227,6 @@ graphFullAid(foreignAidDonors)
 graphThirdQuartileAid(foreignAidDonors)
 ```
 
-Out of 196 countries, 43 countries donated foreign aid to other countries. The 43 countries are listed below:
-
 The top 25% of foreign aid donors consists of the following 11 countries (listed in increasing order): Switzerland ($3055.59 M), Norway ($4752.99 M), Sweden ($5239.79 M), Australia ($5402.70 M), Netherlands ($5522.84 M), Canada ($5650.26 M), Japan ($10604.51 M), France ($12028.27 M), Germany ($12939.49 M), United Kingdom ($13891.44 M), and United States ($30686.96 M). In total, the 43 countries donated a total of $133201.9 million to other countries, and so the United States donated 23.0% of the total foreign aid (mean = 2.33%, standard deviation =  4.24%).
 
 ####Foreign Aid Recipient Full Spread
@@ -237,8 +240,6 @@ fullForeignAidSpread(foreignAidRecipients)
 ```{r}
 fourteenHighestReceived(foreignAidRecipients)
 ```
-
-Out of 196 countries, 153 countries received foreign aid from other countries. The 153 countries are listed below:
 
 The top 14 foreign aid recipients consists of the following countries (listed in increasing order): Egypt ($3520.52 M), Mozambique ($3699.79 M), Turkey ($4101.74 M), Indonesia ($4315.83 M), China ($4393.98 M), Bangladesh ($4519.41 M), Democratic Republic of the Congo ($4559.23 M), Pakistan ($4643.55 M), Tanzania ($4682.67 M), Ethiopia ($5218.48 M), Kenya ($5257.59 M), India ($6701.11 M), Vietnam ($7951.92 M), and Afghanistan ($12428.71 M). In total, the 153 countries received a total of $184745.3 million from other countries. This indicates that India received 3.6%, Vietnam received 4.3%, and Afghanistan received 6.7% of the total foreign aid (mean = 0.65%,  standard deviation = 0.92%).
 

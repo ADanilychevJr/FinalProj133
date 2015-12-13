@@ -39,7 +39,7 @@ cleanWDICountryNames <- function(wdi){
 cleanAidCountryNames <- function(aid){
   aid = repCName(aid, "Chinese Taipei", "China")
   aid = repCName(aid, "Kuwait (KFAED)", "Kuwait")
-  aid = subset(aid,!(Country %in% c("EU Institutions" ,"Total DAC Countries")) )
+  aid = subset(aid,!(Country %in% c("EU Institutions" ,"Total DAC Countries")))
   return(aid)
 }
 
@@ -65,7 +65,8 @@ removeRecipientCountries <- function(foreignAidRecipients){
   return(foreignAidRecipients)
 }
 
-#Creates a dataframe that aggregates all received aid for each country, drops appropriate rows/columns
+#Creates a dataframe that aggregates all received aid for each country
+#and drops appropriate rows/columns
 getRecipientDF <- function(){
   foreignAid     = read.csv("rawdata/foreignAidRaw.csv")
   foreignAid = subset(foreignAid, year == 2012)
@@ -76,7 +77,8 @@ getRecipientDF <- function(){
                    "share", "donornamee")
   foreignAid = foreignAid[,!names(foreignAid) %in% dropped_cols]
   
-  colnames(foreignAid)[which(names(foreignAid) == "RecipientNameE")] <- "Country"
+  colnames(foreignAid)[which(names(foreignAid) ==
+                               "RecipientNameE")] <- "Country"
   foreignAid = aggregate(foreignAid$Amount, 
                          by = list(Country = foreignAid$Country), sum)
   colnames(foreignAid)[which(names(foreignAid) == "x")] <- "Amount"
