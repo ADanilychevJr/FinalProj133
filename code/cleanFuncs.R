@@ -32,7 +32,6 @@ cleanWDICountryNames <- function(wdi){
   wdi = repCName(wdi, "Venezuela, RB", "Venezuela")
   wdi = repCName(wdi, "Yemen, Rep.", "Yemen")
   wdi = repCName(wdi, "Kyrgyz Republic", "Kyrgyzstan")
-  print("Cleaned country names")
   return(wdi)
 }
 

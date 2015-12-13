@@ -1,7 +1,8 @@
 #This contains all functions to create graphs
-library(RColorBrewer)
-library(ggplot2)
-library(corrplot)
+
+library(RColorBrewer) #RColorBrewer helpful for color palettes
+library(ggplot2) 
+library(corrplot) #Helpful for plotting correlation matrices
 
 #Plots Countries vs Donated Aid in million USD 
 graphFullAid <- function(foreignAid){
@@ -67,22 +68,32 @@ plotSubstantialCensorshipCountries <- function(censorship, vs = "GDP_per_cap"){
          Military == "substantial")
   
   
-  d<- ggplot(highCensorshipCountries)
+  
   if(vs == "GDP_per_cap"){
-      colors = c(rep("#ff0000", nrow(highCensorshipCountries)))
-      d + aes(y = GDP_per_cap, x = reorder(Country, GDP_per_cap)) + 
-      geom_histogram(stat = "identity", fill = colors)+
-      labs(y = "GDP per Capita (USD)", x = "Country")+
-      theme(axis.text.x = element_text(angle = 325)) + 
-      labs(title = "GDP per capita for Countries w/ Substantial Censorship")
+     plotGDPperCapHighCensorship(highCensorshipCountries)
   } else if (vs == "Population"){
-      colors = c(rep("#ffa500", nrow(highCensorshipCountries)))
-      d + aes(y = Population, x = reorder(Country, Population)) + 
-      geom_histogram(stat = "identity", fill = colors)+
-      labs(y = "Population", x = "Country")+
-      theme(axis.text.x = element_text(angle = 325)) + 
-      labs(title = "Population for Countries w/ Substantial Censorship")
+      plotPopHighCensorship(highCensorshipCountries)
   } 
+}
+
+plotGDPperCapHighCensorship <- function(highCensorshipCountries){
+  d<- ggplot(highCensorshipCountries)
+  colors = c(rep("#ff0000", nrow(highCensorshipCountries)))
+  d + aes(y = GDP_per_cap, x = reorder(Country, GDP_per_cap)) + 
+  geom_histogram(stat = "identity", fill = colors)+
+  labs(y = "GDP per Capita (USD)", x = "Country")+
+  theme(axis.text.x = element_text(angle = 325)) + 
+  labs(title = "GDP per capita for Countries w/ Substantial Censorship")
+}
+
+plotPopHighCensorship <- function(highCensorshipCountries){
+    d<- ggplot(highCensorshipCountries)
+    colors = c(rep("#ffa500", nrow(highCensorshipCountries)))
+    d + aes(y = Population, x = reorder(Country, Population)) + 
+    geom_histogram(stat = "identity", fill = colors)+
+    labs(y = "Population", x = "Country")+
+    theme(axis.text.x = element_text(angle = 325)) + 
+    labs(title = "Population for Countries w/ Substantial Censorship")
 }
 
 plotCensorshipVs<- function(censorship, category, vs){

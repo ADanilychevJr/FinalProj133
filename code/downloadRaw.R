@@ -1,5 +1,5 @@
 #This downloads the raw data
-source("code/constants.R")
+source("code/constants.R") #Contains constants like data URL locations
 
 if (!("WDI" %in% rownames(installed.packages()))){
   install.packages('WDI')
@@ -19,6 +19,7 @@ populations = WDI(indicator = total_pop_indic, start = 2012, end = 2012)
 tax_revenue = WDI(indicator = tax_revenue_indic, start = 2012, end = 2012)
 gdp_growth = WDI(indicator = gdp_growth_indic, start = 2012, end = 2012)
 
+#Write csvs to the rawdata folder
 write.csv(gdp_dat,"rawdata/gdpUSD.csv", row.names = FALSE)
 write.csv(gdp_per_capita,"rawdata/gdpPerCapUSD.csv", row.names = FALSE)
 write.csv(populations,"rawdata/populations.csv", row.names = FALSE)

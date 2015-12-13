@@ -1,8 +1,7 @@
 #This file cleans the data in the rawdata dir and moves the clean data to cleandata/
 
-
-source("code/cleanFuncs.R")
-source("code/cleanCensorship.R")
+source("code/cleanFuncs.R") #helper functions for cleaning
+source("code/cleanCensorship.R") #helper functions for cleaning Censorship data specifically
 print("Cleaning code")
 
 #Read in our raw data
