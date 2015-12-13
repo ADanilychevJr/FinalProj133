@@ -7,10 +7,19 @@ output: html_document
 
 Placeholder text woo
 
+__TaxRevenue__: Tax Revenue as % of GDP
+
+__Political__, __Social__, __Internet__, __Military__ can all be found in the censorship README
+
 ## Sourcing and loading our dataframes
 
 ```{r}
+if (!("corrplot" %in% rownames(installed.packages()))){
+  install.packages("corrplot",repos="http://cran.rstudio.com/")
+}
+library(corrplot)
 library(ggplot2)
+library(reshape2)
 source("graphHelper.R")
 resetPar <- function() {
     dev.new()
@@ -85,6 +94,22 @@ highestCensorship(censorship, category = "Internet", "GDP_per_cap")
 highestCensorship(censorship, category = "Military", "GDP_per_cap")
 ```
 
+##Checking correlations
+
+###Lets try checking correlation including tax (around 20 tax values out of 72 are missing, so this is less countries)
+
 ```{r}
+plotCorrMatrix(censorship, rmTax = FALSE, method = "ellipse")
+
+plotCorrMatrix(censorship, rmTax = FALSE, method = "shade")
+
 ```
 
+###Now lets try checking correlation without tax (more data included this way)
+
+```{r}
+plotCorrMatrix(censorship, rmTax = TRUE, method = "ellipse")
+
+plotCorrMatrix(censorship, rmTax = TRUE, method = "shade")
+
+```

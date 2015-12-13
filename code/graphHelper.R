@@ -1,6 +1,7 @@
 #This contains all functions to create graphs
 library(RColorBrewer)
 library(ggplot2)
+library(corrplot)
 
 graphFullAid <- function(foreignAid){
   colors = c(rep("#0099FF",nrow(foreignAid)))
@@ -64,7 +65,21 @@ plotCensorshipVs<- function(censorship, category, vs){
   ggtitle(paste0(category, " Censorship vs GDP per Capita"))
 }
 
-getCorrelationMatrix <- function(censorship){
-  cols = c("Political", "Social", "Internet", "Military", "GDP_per_cap", "Population")
+getCorrelationMatrix <- function(censorship, rmTax = TRUE){
+  cols = c("Political", "Social", "Internet", "Military",
+           "GDP_per_cap", "Population", "PopGrowth")
+  if (rmTax == FALSE){
+    cols = c(cols, "Tax_Revenue")
+  }
+  censorship = censorship[,cols]
+  censorship = na.omit(censorship)
+  censorship = sapply(censorship,as.numeric)
+  return(cor(censorship))
+}
+
+plotCorrMatrix <- function(censorship, rmTax, method){
+  
+  corr_matrix = getCorrelationMatrix(censorship, rmTax)
+  corrplot(corr_matrix, method = method)
 }
 

@@ -19,6 +19,9 @@ repCName <- function(wdi, old, new){
 }
 
 cleanWDICountryNames <- function(wdi){
+  wdi = wdi[complete.cases(wdi),]
+  row.names(wdi) = 1:nrow(wdi)
+  wdi$Country = unlist(lapply(wdi$Country, as.character))
   wdi = repCName(wdi, "Korea, Rep.", "Korea")
   wdi = repCName(wdi, "Russian Federation", "Russia")
   wdi = repCName(wdi, "Egypt, Arab Rep.", "Egypt")
