@@ -288,3 +288,12 @@ plotRecipientsVsCensorshipScore(censorship, foreignAidRecipients)
 The graph above shows a flat trendline, indicating little to no correlation between censorship score category and amount of aid received. Within the category of censorship score between 2.5 and 5, however, these countries seemed to have received the lowest amount of foreign aid on average. These countries include: Azerbaijian, Kazakhstan, Georgia and Kyrgzystan. 
 
 Looking at amount of aid received to GDP per capita, we noted that most countries with higher GDP per capita, or interpreted as countries with a higher average income per person, received little to no foreign aid. This insight was as expected, since wealthier and larger economies are probably more likely to not need additional foreign aid except in unexpected and extreme situations. However, we noted one outlier - Turkey, which had a censorship score of 6 and a GDP per capita of 10,646. 
+
+#Appendix (additional plots we enjoyed)
+
+```{r}
+plotCensorshipVs(censorship, "Social","GDP_per_cap")
+plotCensorshipVs(censorship, "Political","GDP_per_cap")
+plotCensorshipVs(censorship, "Internet","GDP_per_cap")
+#plotCensorshipVs(censorship, "Military","GDP_per_cap")
+```
