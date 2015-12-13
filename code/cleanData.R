@@ -1,6 +1,5 @@
-#This file cleans the data in the rawdata dir and moves the clean data to data/
-#TODO: might want to remove the non-country entries in the WDI dataframe
-#TODO: be careful of different currencies
+#This file cleans the data in the rawdata dir and moves the clean data to cleandata/
+
 
 source("code/cleanFuncs.R")
 source("code/cleanCensorship.R")
@@ -16,7 +15,6 @@ tax_revenue    = read.csv("rawdata/taxRevenue.csv")
 pop_growth     = read.csv("rawdata/gdpGrowth.csv")
 
 #Combine WDI frames
-
 wdi_frame = data.frame(Country = gdp_per_capita$country, 
                        GDP = gdp_dat$NY.GDP.MKTP.CD, 
                        GDP_per_cap = gdp_per_capita$NY.GDP.PCAP.CD,
@@ -61,34 +59,16 @@ for (country in net_foreignAid$Country){
    
 }
 
-#Merge in GDP information to foreignAid and 
+#Merge in WDI information to foreignAid
 net_foreignAid = merge(x = net_foreignAid, y = wdi_frame, by = "Country", all.x = TRUE)
 net_foreignAid = merge(x = net_foreignAid, y = wdi_frame2, by = "Country", all.x = TRUE)
 net_foreignAid = merge(x = net_foreignAid, y = wdi_frame3, by = "Country", all.x = TRUE)
+#Merge censorship data with WDI data
 censorship = merge(x = censorship, y = wdi_frame, by = "Country", all.x = TRUE)
 censorship = merge(x = censorship, y = wdi_frame2, by = "Country", all.x = TRUE)
 censorship = merge(x = censorship, y = wdi_frame3, by = "Country", all.x = TRUE)
 
-#print(intersect(net_foreignAid$Country, censorship$Country))
-#print(setdiff(net_foreignAid$Country, censorship$Country))
-#print(setdiff(censorship$Country, net_foreignAid$Country))
-if (FALSE){
-intersect(net_foreignAid$Country, wdi_frame$Country)
-setdiff(net_foreignAid$Country, wdi_frame$Country)
-setdiff(wdi_frame$Country,net_foreignAid$Country)
 
-intersect(net_foreignAid$Country, censorship$Country)
-setdiff(net_foreignAid$Country, censorship$Country)
-setdiff(censorship$Country, net_foreignAid$Country)
-
-intersect(censorship$Country, wdi_frame$Country)
-setdiff(censorship$Country, wdi_frame$Country)
-setdiff(wdi_frame$Country,censorship$Country)
-
-intersect(foreignAidRecipients$Country, wdi_frame$Country)
-setdiff(censorship$Country, foreignAidRecipients$Country)
-intersect(censorship$Country, foreignAidRecipients$Country)
-}
 
 #Now we write out our clean data
 write.csv(wdi_frame,cleanWDILoc, row.names = FALSE)

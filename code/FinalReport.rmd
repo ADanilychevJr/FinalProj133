@@ -20,7 +20,6 @@ if (!("corrplot" %in% rownames(installed.packages()))){
 if (!("rworldmap" %in% rownames(installed.packages()))){
   install.packages("rworldmap",repos="http://cran.rstudio.com/")
 }
-library(rworldmap)
 library(corrplot)
 library(ggplot2)
 library(reshape2)

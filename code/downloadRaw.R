@@ -1,13 +1,14 @@
 #This downloads the raw data
 source("code/constants.R")
 
-install.packages('WDI')
+if (!("WDI" %in% rownames(installed.packages()))){
+  install.packages('WDI')
+}
 library('WDI')
 
 #Download the raw data
 download.file(foreignAidURL,rawAidLoc)
 download.file(censorshipURL, rawCensorshipLoc)
-download.file(refugeeURL, rawRefugeeLoc)
 download.file(censorshipReadmeURL, censorshipReadmeLoc)
 
 #To search stats, WDIsearch("gdp") or WDIsearch("aid"). This is basically a grep

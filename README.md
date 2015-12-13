@@ -43,7 +43,6 @@
 
 **Economic Indicator Data** We pulled our economic indicator data from the [World Bank](http://databank.worldbank.org/data/home.aspx) using the WDI library. This includes data on GDP, Population, Population Growth, and Tax Revenue. You can learn more [here](https://github.com/vincentarelbundock/WDI)
 
-**Syrian Refugee Data** We pulled our data regarding Syrian Refugee admittance from [UNHCR](http://data.unhcr.org/syrianrefugees/asylum.php). We converted the data from pdf to csv and hosted it. 
 
 ###Extra Libraries Used
 

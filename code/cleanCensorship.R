@@ -1,8 +1,8 @@
 #This script contains functions that clean the censorship data (individually)
-#This still needs to be combined with other data outside of this file
 
 source("code/cleanFuncs.R")
 
+#Creates a new column which adds each countries censorship scores
 addCombinedCensorship<- function(censorshipDF){
    newCol = as.numeric(censorshipDF$Political)+
             as.numeric(censorshipDF$Social)+
@@ -13,12 +13,14 @@ addCombinedCensorship<- function(censorshipDF){
    return(censorshipDF)
 }
 
+#Removes countries in country_vec from the censorship DF
 removeCountries <- function(censorshipDF, country_vec){
   censorshipDF = censorshipDF[!(censorshipDF$Country %in% country_vec),]
   row.names(censorshipDF) = 1:nrow(censorshipDF)
   return(censorshipDF)
 }
 
+#Renames columns of Censorship dataframe
 renameCensorshipCols <- function(censorship){
   colnames(censorship)[which(names(censorship) == "political_description")] <- "Political"
   colnames(censorship)[which(names(censorship) == "social_description")] <- "Social"
@@ -27,6 +29,7 @@ renameCensorshipCols <- function(censorship){
   return(censorship)
 }
 
+#Main entrypoint for cleaning the censorship dataframe
 cleanCensorship <- function(censorshipDF){
   #Replace country column with Country
   censorshipDF$country = as.character(censorshipDF$country)

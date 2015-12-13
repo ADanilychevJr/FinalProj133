@@ -3,6 +3,7 @@ library(RColorBrewer)
 library(ggplot2)
 library(corrplot)
 
+#Plots Countries vs Donated Aid in million USD 
 graphFullAid <- function(foreignAid){
   colors = c(rep("#0099FF",nrow(foreignAid)))
   d <- ggplot(foreignAid, aes(y = Amount, x = reorder(Country, Amount)))
@@ -11,13 +12,15 @@ graphFullAid <- function(foreignAid){
     theme(axis.text.x = element_blank())
 }
 
+#
 graphThirdQuartileAid <- function(foreignAid){
   third_q = summary(foreignAid$Amount)[5]
   upper_third_subset = subset(foreignAid, Amount >= third_q)
   d <- ggplot(upper_third_subset, aes(y = Amount, 
                                                                  x = reorder(Country, Amount)))
   colors = c(rep("#0099FF",nrow(upper_third_subset)))
-  d+ geom_histogram(stat = "identity", fill = colors) + labs(y = "Donated Aid (m USD)", x = "Country") +
+  d+ geom_histogram(stat = "identity", fill = colors) +
+    labs(y = "Donated Aid (m USD)", x = "Country") +
     theme(axis.text.x = element_text(angle = 325))
 }
 

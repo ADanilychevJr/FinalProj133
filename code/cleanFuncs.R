@@ -1,4 +1,4 @@
-#This file contains functions that clean data
+#This file contains helper functions for cleaning data
 
 #Takes in foreignAid dataframe and countryname, returns total aid received
 getTotalReceived <- function(country, df){
@@ -10,7 +10,7 @@ getTotalReceived <- function(country, df){
   return(amt_received)
 }
 
-
+#Takes in a dataframe and replaces old country name with new country name
 repCName <- function(wdi, old, new){
   if (old %in% wdi$Country){
     wdi$Country[wdi$Country == old] <- new
@@ -18,6 +18,7 @@ repCName <- function(wdi, old, new){
   return(wdi)
 }
 
+#Standardizes WDI frame Country names with other frames, removes null entries
 cleanWDICountryNames <- function(wdi){
   wdi = wdi[complete.cases(wdi),]
   row.names(wdi) = 1:nrow(wdi)
@@ -35,6 +36,7 @@ cleanWDICountryNames <- function(wdi){
   return(wdi)
 }
 
+#Standardizes the aid country names with other frames
 cleanAidCountryNames <- function(aid){
   aid = repCName(aid, "Chinese Taipei", "China")
   aid = repCName(aid, "Kuwait (KFAED)", "Kuwait")
@@ -42,13 +44,13 @@ cleanAidCountryNames <- function(aid){
   return(aid)
 }
 
+#Standardizes the censorship country names with other frames
 cleanCensorshipCountryNames <- function(censorship){
   censorship = repCName(censorship, "South Korea", "Korea")
   return(censorship)
 }
 
-
-
+#Removes aggregate/unspecified recipients of foreign aid (we only want countries)
 removeRecipientCountries <- function(foreignAidRecipients){
   rmCountries = c("Africa, regional",
                   "America, regional", "South & Central Asia, regional",
@@ -64,16 +66,16 @@ removeRecipientCountries <- function(foreignAidRecipients){
   return(foreignAidRecipients)
 }
 
+#Creates a dataframe that aggregates all received aid for each country, drops appropriate rows/columns
 getRecipientDF <- function(){
   foreignAid     = read.csv("rawdata/foreignAidRaw.csv")
   foreignAid = subset(foreignAid, year == 2012)
- 
+  #Drop columns we don't need
   dropped_cols = c("year","DonorCode","src", "RecipientCode", 
                    "col", "incomegrid", "incomegrname", "rowname", "Row", 
                    "Defl", "NatCur", "currencyname", "odaGNI", "colname",
                    "share", "donornamee")
   foreignAid = foreignAid[,!names(foreignAid) %in% dropped_cols]
-  
   
   colnames(foreignAid)[which(names(foreignAid) == "RecipientNameE")] <- "Country"
   foreignAid = aggregate(foreignAid$Amount, by = list(Country = foreignAid$Country), sum)
