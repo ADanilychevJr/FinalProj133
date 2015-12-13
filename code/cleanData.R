@@ -1,7 +1,8 @@
 #This file cleans the data in the rawdata dir and moves the clean data to cleandata/
 
 source("code/cleanFuncs.R") #helper functions for cleaning
-source("code/cleanCensorship.R") #helper functions for cleaning Censorship data specifically
+#helper functions for cleaning Censorship data specifically
+source("code/cleanCensorship.R") 
 print("Cleaning code")
 
 #Read in our raw data
@@ -23,7 +24,8 @@ wdi_frame2 = data.frame(Country = tax_revenue$country,
 wdi_frame3 = data.frame(Country =pop_growth$country,
                         PopGrowth = pop_growth$NY.GDP.MKTP.KD.ZG)
 
-#Remove rows with missing information, re-number those rows, change the number of levels in Country factor
+#Remove rows with missing information, re-number those rows,
+#change the number of levels in Country factor
 foreignAid = subset(foreignAid, year == 2012)
 #wdi_frame = wdi_frame[complete.cases(wdi_frame),]
 #row.names(wdi_frame) = 1:nrow(wdi_frame)
@@ -41,11 +43,13 @@ dropped_cols = c("year","DonorCode","src", "RecipientCode", "regionid",
                  "Defl", "NatCur", "currencyname", "odaGNI", "colname",
                  "RecipientNameE",  "share")
 net_foreignAid = net_foreignAid[,!names(net_foreignAid) %in% dropped_cols]
-colnames(net_foreignAid)[which(names(net_foreignAid) == "donornamee")] <- "Country"
+colnames(net_foreignAid)[which(names(net_foreignAid) ==
+                                 "donornamee")] <- "Country"
 net_foreignAid$Country = as.character(net_foreignAid$Country)
 net_foreignAid = cleanAidCountryNames(net_foreignAid)
 
-#Creating `foreignAidRecipients` which shows the amount of aid each country received
+#Creating `foreignAidRecipients` which shows
+#the amount of aid each country received
 foreignAidRecipients = getRecipientDF()
 
 #Censorship data cleaning
@@ -54,7 +58,8 @@ censorship = cleanCensorship(censorship)
 #Add received aid to net_foreignAid
 net_foreignAid$AmountReceivedUSD = 1:nrow(net_foreignAid)
 for (country in net_foreignAid$Country){
-   net_foreignAid[net_foreignAid$Country == country, ]$AmountReceivedUSD = getTotalReceived(country, foreignAid)
+   net_foreignAid[net_foreignAid$Country == country,
+                  ]$AmountReceivedUSD = getTotalReceived(country, foreignAid)
    
 }
 
@@ -66,9 +71,12 @@ net_foreignAid = merge(x = net_foreignAid, y = wdi_frame2,
 net_foreignAid = merge(x = net_foreignAid, y = wdi_frame3, 
                        by = "Country", all.x = TRUE)
 #Merge censorship data with WDI data
-censorship = merge(x = censorship, y = wdi_frame, by = "Country", all.x = TRUE)
-censorship = merge(x = censorship, y = wdi_frame2, by = "Country", all.x = TRUE)
-censorship = merge(x = censorship, y = wdi_frame3, by = "Country", all.x = TRUE)
+censorship = merge(x = censorship, 
+                   y = wdi_frame, by = "Country", all.x = TRUE)
+censorship = merge(x = censorship, 
+                   y = wdi_frame2, by = "Country", all.x = TRUE)
+censorship = merge(x = censorship, 
+                   y = wdi_frame3, by = "Country", all.x = TRUE)
 
 
 
@@ -76,5 +84,6 @@ censorship = merge(x = censorship, y = wdi_frame3, by = "Country", all.x = TRUE)
 write.csv(wdi_frame,cleanWDILoc, row.names = FALSE)
 write.csv(net_foreignAid, cleanForeignAidLoc, row.names = FALSE)
 write.csv(censorship, cleanCensorshipLoc, row.names = FALSE)
-write.csv(foreignAidRecipients, cleanForeignAidRecipientsLoc, row.names = FALSE)
+write.csv(foreignAidRecipients, 
+          cleanForeignAidRecipientsLoc, row.names = FALSE)
                            
