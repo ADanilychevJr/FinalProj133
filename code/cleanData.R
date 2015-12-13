@@ -44,7 +44,6 @@ dropped_cols = c("year","DonorCode","src", "RecipientCode", "regionid",
                  "Defl", "NatCur", "currencyname", "odaGNI", "colname",
                  "RecipientNameE",  "share")
 net_foreignAid = net_foreignAid[,!names(net_foreignAid) %in% dropped_cols]
-#colnames(net_foreignAid)[which(names(net_foreignAid) == "Amount")] <- "AmountGivenUSD"
 colnames(net_foreignAid)[which(names(net_foreignAid) == "donornamee")] <- "Country"
 net_foreignAid$Country = as.character(net_foreignAid$Country)
 net_foreignAid = cleanAidCountryNames(net_foreignAid)
@@ -64,6 +63,8 @@ for (country in net_foreignAid$Country){
 
 #Merge in GDP information to foreignAid and 
 net_foreignAid = merge(x = net_foreignAid, y = wdi_frame, by = "Country", all.x = TRUE)
+net_foreignAid = merge(x = net_foreignAid, y = wdi_frame2, by = "Country", all.x = TRUE)
+net_foreignAid = merge(x = net_foreignAid, y = wdi_frame3, by = "Country", all.x = TRUE)
 censorship = merge(x = censorship, y = wdi_frame, by = "Country", all.x = TRUE)
 censorship = merge(x = censorship, y = wdi_frame2, by = "Country", all.x = TRUE)
 censorship = merge(x = censorship, y = wdi_frame3, by = "Country", all.x = TRUE)

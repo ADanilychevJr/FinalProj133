@@ -3,7 +3,6 @@ source("code/constants.R")
 
 #Create directories
 dir.create("rawdata")
-dir.create("data")
 dir.create("cleandata")
 dir.create("resources")
 

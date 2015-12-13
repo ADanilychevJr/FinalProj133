@@ -57,6 +57,31 @@ plotCensorshipSingle <- function(censorship, category){
     ggtitle(paste0(category, " Frequencies"))
 }
 
+plotSubstantialCensorshipCountries <- function(censorship, vs = "GDP_per_cap"){
+  highCensorshipCountries = subset(censorship, Political == "substantial" |
+         Social == "substantial" |
+         Internet == "substantial" | 
+         Military == "substantial")
+  
+  
+  d<- ggplot(highCensorshipCountries)
+  if(vs == "GDP_per_cap"){
+      colors = c(rep("#ff0000", nrow(highCensorshipCountries)))
+      d + aes(y = GDP_per_cap, x = reorder(Country, GDP_per_cap)) + 
+      geom_histogram(stat = "identity", fill = colors)+
+      labs(y = "GDP per Capita (USD)", x = "Country")+
+      theme(axis.text.x = element_text(angle = 325)) + 
+      labs(title = "GDP per capita for Countries w/ Substantial Censorship")
+  } else if (vs == "Population"){
+      colors = c(rep("#ffa500", nrow(highCensorshipCountries)))
+      d + aes(y = Population, x = reorder(Country, Population)) + 
+      geom_histogram(stat = "identity", fill = colors)+
+      labs(y = "Population", x = "Country")+
+      theme(axis.text.x = element_text(angle = 325)) + 
+      labs(title = "Population for Countries w/ Substantial Censorship")
+  } 
+}
+
 plotCensorshipVs<- function(censorship, category, vs){
   col_scheme = brewer.pal(nlevels(censorship[[category]]), "YlOrRd")
   d<- ggplot(censorship) 
@@ -82,4 +107,6 @@ plotCorrMatrix <- function(censorship, rmTax, method){
   corr_matrix = getCorrelationMatrix(censorship, rmTax)
   corrplot(corr_matrix, method = method)
 }
+
+
 
